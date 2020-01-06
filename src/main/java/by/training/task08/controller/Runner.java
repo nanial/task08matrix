@@ -18,15 +18,18 @@ public class Runner {
         CreateMatrix cm = new CreateMatrixImpl();
         int [][] p = cm.create(10, 8);
         int [][] q = cm.create(8, 10);
-        MatrixValidator mv = new MatrixValidator();
+
         MatrixOperation mo = new MatrixOperationImpl();
         PrintMatrix pm = new PrintMatrixImpl();
 
         try{
-            mv.checkRange(p, q);
-            mv.checkRange(firstReadMatrix, secondReadMatrix);
-            pm.printMatrix(mo.multiply(p, q));
             pm.printMatrix(mo.multiply(firstReadMatrix, secondReadMatrix));
+
+        }catch (MatrixException me){
+            me.getMessage();
+        }
+        try{
+            pm.printMatrix(mo.multiply(p, q));
 
         }catch (MatrixException me){
             me.getMessage();

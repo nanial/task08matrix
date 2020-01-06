@@ -1,19 +1,25 @@
 package by.training.task08.service;
 
+import by.training.task08.exception.MatrixException;
+import by.training.task08.validator.MatrixValidator;
+
 public class MatrixOperationImpl implements MatrixOperation {
 
     @Override
-    public int[][] multiply(int[][] p, int[][] q) {
+    public int[][] multiply(int[][] p, int[][] q) throws MatrixException {
 
         int[][] resMatrix = new int[p.length][q[0].length];
 
-        for (int i = 0; i < p.length; i++) {
+        if(new MatrixValidator().checkRange(p, q)) {
 
-            for (int j = 0; j < q[0].length; j++) {
+            for (int i = 0; i < p.length; i++) {
 
-                for (int k = 0; k < p[j].length; k++) {
+                for (int j = 0; j < q[0].length; j++) {
 
-                    resMatrix[i][j] += p[i][k] * q[k][j];
+                    for (int k = 0; k < p[j].length; k++) {
+
+                        resMatrix[i][j] += p[i][k] * q[k][j];
+                    }
                 }
             }
         }
